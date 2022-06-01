@@ -1,0 +1,21 @@
+.btn {
+    width: 28%;
+    height: 10mm;
+    text-transform: uppercase;
+    background-color: #000080;
+    color: #fff;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .buttonsubmit{
+    margin-bottom: 10px;
+    height: 25px;
+  }
+  
+  .paper{
+    padding: 20px;
+    width: 500px;
+    height: 260px;
+  }
+  

@@ -1,0 +1,15 @@
+.loginform .paperStyle{
+    padding: 20;
+    height: 70vh;
+    width: 280;
+    margin: 20px auto;
+}
+
+.loginform .avatarStyle{
+    backgroundColor: #1bbd7e !important;
+}
+
+.loginform .btnStyle{
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
