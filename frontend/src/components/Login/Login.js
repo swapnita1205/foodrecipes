@@ -51,6 +51,7 @@ const Login = () => {
         });
       } else {
         alert(res.data.message);
+        setUser({ email: "", password: "" });
       }
     });
   };
