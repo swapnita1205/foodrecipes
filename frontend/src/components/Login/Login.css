@@ -1,15 +1,25 @@
-.loginform .paperStyle{
-    padding: 20;
-    height: 70vh;
-    width: 280;
-    margin: 20px auto;
+.loginform .paperStyle {
+  padding: 30px 20px;
+  height: 40vh;
+  width: 10cm;
+  margin: 80px auto;
 }
 
-.loginform .avatarStyle{
-    backgroundColor: #1bbd7e !important;
+.loginform .avatarStyle {
+  background-color: #4c5a55 !important;
 }
 
-.loginform .btnStyle{
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
+.loginform .btnStyle {
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+}
+
+.loginform .signuphere {
+  color: rgb(18, 17, 105);
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.loginform .signupform{
+  float: right;
 }

@@ -41,12 +41,14 @@ const Login = () => {
         const userId = res.data.user._id.valueOf();
         const token = res.data.user.token;
         const _id = res.data.user._id;
+        const name = res.data.user.name;
         cookie.set("token", res.data.user.token);
         history("/Home", {
           state: {
             _id: _id,
             token: token,
             userId: userId,
+            name: name,
           },
         });
       } else {
@@ -55,13 +57,13 @@ const Login = () => {
       }
     });
   };
-  
+
   if (document.cookie) {
-    return <Error />
+    return <Error />;
   }
   return (
     <Grid className="loginform">
-      <Paper elevation={10} className="paperStyle">
+      <Paper elevation={15} className="paperStyle">
         <Grid align="center">
           <Avatar className="avatarStyle">
             <LockOutlinedIcon />
@@ -98,20 +100,20 @@ const Login = () => {
             Sign in
           </Button>
         </form>
-        <form autoComplete="off" noValidate onSubmit={sign}>
-          <Typography>
-            {" "}
-            <b> DON'T HAVE AN ACCOUNT ? </b>
+        <form
+          autoComplete="off"
+          noValidate
+          className="signupform"
+          onSubmit={sign}
+        >
+          <Typography variant="h6">
+            <b>
+              Don't have an account ?
+              <Button type="submit" className="signuphere">
+                Sign Up Here
+              </Button>
+            </b>
           </Typography>
-          <Button
-            type="submit"
-            color="primary"
-            variant="contained"
-            className="btnStyle"
-            fullWidth
-          >
-            Sign Up
-          </Button>
         </form>
       </Paper>
     </Grid>

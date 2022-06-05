@@ -8,6 +8,7 @@ import EachRecipe from "./EachRecipe";
 import Alert from "../Home/Alert";
 import { v4 as uuid } from "uuid";
 import Error from "../Error/Error";
+import Header from "../Header/Header";
 
 const MyRecipes = () => {
   const history = useNavigate();
@@ -18,6 +19,7 @@ const MyRecipes = () => {
   const userId = location.state ? location.state.userId : "";
   const _id = location.state ? location.state._id : 0;
   const token = location.state ? location.state.token : "";
+  const name = location.state ? location.state.name : "";
   const [recipes, setRecipes] = useState([]);
   const [flag, isflag] = useState(0);
 
@@ -36,20 +38,12 @@ const MyRecipes = () => {
 
   const onChange = (e) => setQuery(e.target.value);
 
-  const addrecipe = (e) => {
-    history("/AddRecipes", {
-      state: { _id: _id, token: token, userId: userId },
-    });
-  };
-
-  const home = (e) => {
-    history("/Home", { state: { _id: _id, token: token, userId: userId } });
-  };
-
   const logout = (e) => {
     Axios.post("http://localhost:3000/users/logout").then(() => {
       cookie.remove("token");
-      history("/", { state: { _id: _id, token: token, userId: userId } });
+      history("/", {
+        state: { _id: _id, token: token, userId: userId, name: name },
+      });
     });
   };
 
@@ -84,17 +78,8 @@ const MyRecipes = () => {
   }
   return (
     <div>
-      <div className="buttons">
-        <button className="addrecipebtn" onClick={addrecipe}>
-          Add A Recipe
-        </button>
-        <button className="addrecipebtn" onClick={home}>
-          Home
-        </button>
-        <button className="addrecipebtn" onClick={logout}>
-          Logout
-        </button>
-      </div>
+      <Header _id={_id} userId={userId} token={token} name={name} />
+      <h1 className="title">My Recipes</h1>
       <form onSubmit={onSubmit} className="search-my-recipe">
         {alert !== "" && <Alert alert={alert} />}
         <input
@@ -107,7 +92,6 @@ const MyRecipes = () => {
         />
         <input type="submit" value="Search" />
       </form>
-      <h1 className="title">My Recipes</h1>
       <button onClick={showall} className="showall">
         Show All
       </button>
@@ -118,6 +102,8 @@ const MyRecipes = () => {
             recipe={recipe}
             userId={userId}
             token={token}
+            name={name}
+            _id={_id}
           ></EachRecipe>
         ))}
       </Grid>

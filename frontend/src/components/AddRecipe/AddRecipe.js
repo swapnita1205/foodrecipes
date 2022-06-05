@@ -5,6 +5,7 @@ import Axios from "axios";
 import "./AddRecipe.css";
 import cookie from "js-cookie";
 import Error from "../Error/Error";
+import Header from "../Header/Header";
 
 const AddRecipe = () => {
   const history = useNavigate();
@@ -15,6 +16,7 @@ const AddRecipe = () => {
   const _id = location.state ? location.state._id : 0;
   const token = location.state ? location.state.token : "";
   const flag = location.state ? location.state.flag : 0;
+  const name = location.state ? location.state.name : "";
 
   const [postData, setPostData] = useState({
     RecipeName: "",
@@ -42,7 +44,7 @@ const AddRecipe = () => {
       (res) => {
         if (res.data.message === "Recipe Updated") {
           history("/MyRecipes", {
-            state: { _id: _id, token: token, userId: userId },
+            state: { _id: _id, token: token, userId: userId, name: name },
           });
         } else {
           alert(res.data.message);
@@ -58,34 +60,30 @@ const AddRecipe = () => {
       userId,
       postData,
     };
-    Axios.post("http://localhost:3000/recipes/addrecipes", userRecipe).then(
-      (res) => {
-        if (res.data.message === "Recipe added.") {
-          history("/MyRecipes", {
-            state: { _id: _id, token: token, userId: userId },
-          });
-        } else {
-          alert(res.data.message);
+    if (postData.RecipeName && postData.Recipe) {
+      Axios.post("http://localhost:3000/recipes/addrecipes", userRecipe).then(
+        (res) => {
+          if (res.data.message === "Recipe added.") {
+            history("/MyRecipes", {
+              state: { _id: _id, token: token, userId: userId, name: name },
+            });
+          } else {
+            alert(res.data.message);
+          }
         }
-      }
-    );
+      );
+    } else {
+      alert("Please fill the specified fields");
+    }
     clear();
-  };
-
-  const myrecipes = (e) => {
-    history("/MyRecipes", {
-      state: { _id: _id, token: token, userId: userId },
-    });
-  };
-
-  const home = (e) => {
-    history("/Home", { state: { _id: _id, token: token, userId: userId } });
   };
 
   const logout = (e) => {
     Axios.post("http://localhost:3000/users/logout").then(() => {
       cookie.remove("token");
-      history("/", { state: { _id: _id, token: token, userId: userId } });
+      history("/", {
+        state: { _id: _id, token: token, userId: userId, name: name },
+      });
     });
   };
 
@@ -94,15 +92,7 @@ const AddRecipe = () => {
   }
   return (
     <div>
-      <button className="btn" onClick={myrecipes}>
-        My Recipes
-      </button>
-      <button className="btn" onClick={home}>
-        Home
-      </button>
-      <button className="btn" onClick={logout}>
-        Logout
-      </button>
+      <Header _id={_id} userId={userId} token={token} name={name} />
       <Paper className="paper" elevation={6}>
         <form autoComplete="off" noValidate>
           <Typography variant="h3">
@@ -112,7 +102,9 @@ const AddRecipe = () => {
             name="RecipeName"
             variant="outlined"
             label="Recipe Name"
+            className="field1"
             fullWidth
+            required
             value={postData.RecipeName}
             onChange={(e) =>
               setPostData({ ...postData, RecipeName: e.target.value })
@@ -122,8 +114,10 @@ const AddRecipe = () => {
             name="Recipe"
             variant="outlined"
             label="Recipe"
+            className="field2"
             fullWidth
             multiline
+            required
             rows={4}
             value={postData.Recipe}
             onChange={(e) =>

@@ -12,7 +12,7 @@ body {
   font-family: "Poppins", sans-serif;
   color: #fff;
   margin: 30px;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -41,32 +41,30 @@ body {
 }
 
 .title {
-  margin-left: 35%;
+  margin: 40px 450px;
   font-size: 55px;
+  color: #000080;
+  font-style: italic;
   font-family: "Poppins", sans-serif;
 }
 
 .recipeDiv {
   padding: 30px;
-  margin: 40px;
-  margin-left: 400px;
+  margin-left:130px;
+  margin-top:80px;
   box-shadow: 0px 0px 10px 5px #aaa;
   width: 400px;
 }
 
 .search-my-recipe {
-  width: 60rem;
-  height: 5rem;
+  width: 600px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #d3d3d3;
-  border-radius: 0.5rem;
-  margin-bottom: 5rem;
-  box-shadow: 1rem 2rem 5rem #aaa;
-  position: relative;
-  margin-left: 300px;
-  margin-top: 50px;
+  border-radius: 5px;
+  margin: 80px 350px;
 }
 
 .showall {
@@ -77,30 +75,47 @@ body {
   text-transform: uppercase;
   background-color: #000080;
   color: #fff;
-  border-radius: 0.5rem;
+  border-radius: 5px;
+  border:none;
   cursor: pointer;
 }
 
 .search-my-recipe input {
-  font-size: 1.6rem;
+  font-size: 15px;
   border: none;
-  border-bottom: 0.1rem solid #ccc;
-  margin: 0 0.5rem;
-  border-radius: 0.5rem;
-  height: 3rem;
+  margin: 0 5px;
+  border-radius: 5px;
+  height: 30px;
 }
 
 .search-my-recipe input[type="text"] {
-  padding: 0 0.5rem;
-  width: 60%;
+  padding: 0 5px;
+  width: 380px;
   color: #555;
 }
 
 .search-my-recipe input[type="submit"] {
-  width: 25%;
+  width: 150px;
   text-transform: uppercase;
   background-color: #000080;
   color: #fff;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
+}
+
+.recipedetname{
+  margin-left:550px;
+  margin-top:40px;
+}
+
+.recipedetdetails{
+  margin-left:150px;
+  margin-right: 150px;
+  margin-top:20px;
+}
+
+.recipedetstack{
+  float: right;
+  margin-right:300px;
+  margin-top: 20px;
 }

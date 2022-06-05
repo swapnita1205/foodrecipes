@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
@@ -10,16 +10,11 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import Error from "../Error/Error";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 
 const Signup = () => {
   const history = useNavigate();
-
-  useEffect(() => {
-    if (document.cookie) {
-      history("/Home");
-    }
-  });
 
   const [user, setUser] = useState({
     name: "",
@@ -45,7 +40,9 @@ const Signup = () => {
         if (res.data.message === "User already registered") {
           history("/Signup");
           setUser({ name: "", email: "", password: "", reEnterPassword: "" });
-        } else if (res.data.message === "Successfully Registered, Please login now.") {
+        } else if (
+          res.data.message === "Successfully Registered, Please login now."
+        ) {
           history("/");
         }
       });
@@ -58,6 +55,9 @@ const Signup = () => {
     history("/");
   };
 
+  if (document.cookie) {
+    return <Error />;
+  }
   return (
     <Grid>
       <Paper elevation={20} className="paperStyle">
@@ -66,7 +66,7 @@ const Signup = () => {
             <AddCircleOutlineOutlinedIcon />
           </Avatar>
           <h2 className="headerStyle">Sign Up</h2>
-          <Typography variant="caption" className="desc" gutterBottom>
+          <Typography variant="h5" className="desc">
             Please fill this form to create an account !
           </Typography>
         </Grid>
@@ -113,14 +113,20 @@ const Signup = () => {
             Sign up
           </Button>
         </form>
-        <form autoComplete="off" noValidate onSubmit={login}>
-          <Typography>
-            {" "}
-            <b> ALREADY HAVE AN ACCOUNT ? </b>
+        <form
+          autoComplete="off"
+          noValidate
+          className="loginform"
+          onSubmit={login}
+        >
+          <Typography variant="h6">
+            <b>
+              Already have an account ?
+              <Button type="submit" className="loginhere">
+                Login Here
+              </Button>
+            </b>
           </Typography>
-          <Button type="submit" color="primary" variant="contained" fullWidth>
-            Sign In
-          </Button>
         </form>
       </Paper>
     </Grid>

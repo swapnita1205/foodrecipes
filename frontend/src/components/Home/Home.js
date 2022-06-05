@@ -7,6 +7,7 @@ import "./Home.css";
 import { useNavigate } from "react-router";
 import cookie from "js-cookie";
 import { useLocation } from "react-router-dom";
+import Header from "../Header/Header";
 
 const Home = () => {
   const history = useNavigate();
@@ -19,6 +20,7 @@ const Home = () => {
   const userId = location.state ? location.state.userId : "";
   const _id = location.state ? location.state._id : 0;
   const token = location.state ? location.state.token : "";
+  const name = location.state ? location.state.name : "";
 
   useEffect(() => {
     if (document.cookie.substring(6) !== token) {
@@ -51,45 +53,10 @@ const Home = () => {
     };
     Axios.post("http://localhost:3000/users/logout", userInfo).then(() => {
       cookie.remove("token");
-      history("/", { state: { _id: _id, token: token, userId: userId } });
+      history("/", {
+        state: { _id: _id, token: token, userId: userId, name: name },
+      });
     });
-  };
-
-  const myrecipes = (e) => {
-    history("/MyRecipes", {
-      state: { _id: _id, token: token, userId: userId },
-    });
-  };
-
-  const addrecipes = (e) => {
-    history("/AddRecipes", {
-      state: { _id: _id, token: token, userId: userId },
-    });
-  };
-
-  const deactivate = (e) => {
-    const userInfo = {
-      _id,
-      userId,
-    };
-    Axios.post("http://localhost:3000/recipes/deactivate", userInfo).then(
-      (res) => {
-        if (res.data.message === "Successfully Deleted") {
-          Axios.post("http://localhost:3000/users/deactivate", userInfo).then(
-            (res) => {
-              if (res.data.message === "Successfully Deleted") {
-                alert(res.data.message);
-                logout();
-              } else {
-                console.log(res.data.message);
-              }
-            }
-          );
-        } else {
-          console.log(res.data.message);
-        }
-      }
-    );
   };
 
   const onChange = (e) => setQuery(e.target.value);
@@ -104,34 +71,25 @@ const Home = () => {
   }
   return (
     <div>
-      <button className="logout" onClick={myrecipes}>
-        My Recipes
-      </button>
-      <button className="logout" onClick={addrecipes}>
-        Add a Recipe
-      </button>
-      <button className="logout" onClick={logout}>
-        Logout
-      </button>
-      <h1>Food Recipe Page</h1>
-      <form onSubmit={onSubmit} className="search-form">
-        {display !== "" && <Alert alert={display} />}
-        <input
-          type="text"
-          name="query"
-          onChange={onChange}
-          value={query}
-          autoComplete="off"
-          placeholder="Example: Chicken Tikka, Paneer Bhurji, ..."
-        />
-        <input type="submit" value="Search" />
-      </form>
+      <Header _id={_id} userId={userId} token={token} name={name} />
+      <div className="container">
+        <h1 className="h1home">Find a Recipe</h1>
+        <form onSubmit={onSubmit} className="search-form">
+          {display !== "" && <Alert display={display} />}
+          <input
+            type="text"
+            name="query"
+            onChange={onChange}
+            value={query}
+            autoComplete="off"
+            placeholder="  Example:  Chicken Tikka,  Paneer Bhurji, ..."
+          />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
       <div className="recipes">
         {recipes !== [] && recipes.map((recipe) => <Recipe recipe={recipe} />)}
       </div>
-      <button className="delete" onClick={deactivate}>
-        Delete Account
-      </button>
     </div>
   );
 };
