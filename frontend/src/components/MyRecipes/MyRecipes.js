@@ -12,7 +12,7 @@ import Header from "../Header/Header";
 
 const MyRecipes = () => {
   const history = useNavigate();
-  const [alert, setAlert] = useState("");
+  const [display, setDisplay] = useState("");
   const [query, setQuery] = useState("");
 
   const location = useLocation();
@@ -57,9 +57,9 @@ const MyRecipes = () => {
         setRecipes(res.data);
       });
       setQuery("");
-      setAlert("");
+      setDisplay("");
     } else {
-      setAlert("Please fill the form");
+      setDisplay("Please fill the form");
     }
   };
 
@@ -81,7 +81,7 @@ const MyRecipes = () => {
       <Header _id={_id} userId={userId} token={token} name={name} />
       <h1 className="title">My Recipes</h1>
       <form onSubmit={onSubmit} className="search-my-recipe">
-        {alert !== "" && <Alert alert={alert} />}
+        {display !== "" && <Alert display={display} />}
         <input
           type="text"
           name="query"
@@ -96,7 +96,7 @@ const MyRecipes = () => {
         Show All
       </button>
       <Grid container alignItems="stretch" spacing={5}>
-        {recipes.reverse().map((recipe) => (
+        {recipes.map((recipe) => (
           <EachRecipe
             key={uuid()}
             recipe={recipe}

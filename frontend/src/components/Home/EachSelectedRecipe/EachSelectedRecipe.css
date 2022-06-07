@@ -1,0 +1,26 @@
+.recipeselectedDiv {
+  padding: 10px;
+  margin-left: 60px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 10px 5px #aaa;
+  width: 230px;
+  height: 230px;
+  border-radius: 4px;
+}
+
+.recipeselectedimage {
+  width: 200px;
+  height: 200px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.myselectedrecipes {
+    margin-left:50px;
+}
+
+.recipename {
+  font-size: 20px !important;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}

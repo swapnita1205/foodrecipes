@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import { useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
+import FileBase from "react-file-base64";
 import "./AddRecipe.css";
 import cookie from "js-cookie";
 import Error from "../Error/Error";
@@ -12,6 +13,7 @@ const AddRecipe = () => {
   const location = useLocation();
   const recipename = location.state ? location.state.recipename : "";
   const recipedetails = location.state ? location.state.recipedetails : "";
+  const selectedFile = location.state ? location.state.selectedFile : "";
   const userId = location.state ? location.state.userId : "";
   const _id = location.state ? location.state._id : 0;
   const token = location.state ? location.state.token : "";
@@ -21,17 +23,23 @@ const AddRecipe = () => {
   const [postData, setPostData] = useState({
     RecipeName: "",
     Recipe: "",
+    selectedFile: "",
   });
 
   useEffect(() => {
     if (document.cookie.substring(6) !== token) {
       logout();
     }
-    if (flag) setPostData({ RecipeName: recipename, Recipe: recipedetails });
+    if (flag)
+      setPostData({
+        RecipeName: recipename,
+        Recipe: recipedetails,
+        selectedFile: selectedFile,
+      });
   }, []);
 
   const clear = () => {
-    setPostData({ RecipeName: "", Recipe: "" });
+    setPostData({ RecipeName: "", Recipe: "", selectedFile: "" });
   };
 
   const handleUpdateSubmit = (e) => {
@@ -60,7 +68,7 @@ const AddRecipe = () => {
       userId,
       postData,
     };
-    if (postData.RecipeName && postData.Recipe) {
+    if (postData.RecipeName && postData.Recipe && postData.selectedFile) {
       Axios.post("http://localhost:3000/recipes/addrecipes", userRecipe).then(
         (res) => {
           if (res.data.message === "Recipe added.") {
@@ -124,6 +132,16 @@ const AddRecipe = () => {
               setPostData({ ...postData, Recipe: e.target.value })
             }
           />
+          <div>
+            <FileBase
+              type="file"
+              multiple={false}
+              value={postData.selectedFile}
+              onDone={({ base64 }) =>
+                setPostData({ ...postData, selectedFile: base64 })
+              }
+            />
+          </div>
           <Button
             className="buttonsubmit"
             variant="contained"

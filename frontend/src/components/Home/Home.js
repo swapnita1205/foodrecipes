@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import cookie from "js-cookie";
 import { useLocation } from "react-router-dom";
 import Header from "../Header/Header";
+import MySelectedRecipes from "./MySelectedRecipes";
 
 const Home = () => {
   const history = useNavigate();
@@ -37,7 +38,7 @@ const Home = () => {
     if (query !== "") {
       const result = await Axios.get(url);
       if (!result.data.more) {
-        return setDisplay("Oops!No recipe found");
+        return setDisplay("Oops! No recipe found");
       }
       setRecipes(result.data.hits);
       setQuery("");
@@ -87,6 +88,14 @@ const Home = () => {
           <input type="submit" value="Search" />
         </form>
       </div>
+      {recipes.length == 0 && (
+        <MySelectedRecipes
+          userId={userId}
+          _id={_id}
+          name={name}
+          token={token}
+        />
+      )}
       <div className="recipes">
         {recipes !== [] && recipes.map((recipe) => <Recipe recipe={recipe} />)}
       </div>

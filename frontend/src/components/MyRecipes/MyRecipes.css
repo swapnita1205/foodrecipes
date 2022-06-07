@@ -37,21 +37,34 @@ body {
 .recipedetails {
   font-size: 15px;
   font-family: "Poppins", sans-serif;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 }
 
 .title {
   margin: 40px 450px;
   font-size: 55px;
   color: #000080;
-  font-style: italic;
+  /* font-style: italic; */
   font-family: "Poppins", sans-serif;
+}
+
+.selectedimage {
+  width: 350px;
+  height: 300px;
+  margin-left: 15px;
+}
+
+.recipedetselectedimage {
+  width: 350px;
+  height: 300px;
+  margin-top: 20px;
+  margin-left: 450px;
 }
 
 .recipeDiv {
   padding: 30px;
-  margin-left:130px;
-  margin-top:80px;
+  margin-left: 130px;
+  margin-top: 80px;
   box-shadow: 0px 0px 10px 5px #aaa;
   width: 400px;
 }
@@ -64,11 +77,13 @@ body {
   align-items: center;
   background-color: #d3d3d3;
   border-radius: 5px;
-  margin: 80px 350px;
+  margin: 40px 350px;
 }
 
 .showall {
-  margin-left: 800px;
+  margin-right: 80px;
+  margin-bottom: -30px;
+  float: right;
   width: 10%;
   font-family: "Poppins", sans-serif;
   height: 30px;
@@ -76,7 +91,7 @@ body {
   background-color: #000080;
   color: #fff;
   border-radius: 5px;
-  border:none;
+  border: none;
   cursor: pointer;
 }
 
@@ -103,19 +118,19 @@ body {
   cursor: pointer;
 }
 
-.recipedetname{
-  margin-left:550px;
-  margin-top:40px;
+.recipedetname {
+  margin-left: 550px;
+  margin-top: 40px;
 }
 
-.recipedetdetails{
-  margin-left:150px;
+.recipedetdetails {
+  margin-left: 150px;
   margin-right: 150px;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
-.recipedetstack{
+.recipedetstack {
   float: right;
-  margin-right:300px;
+  margin-right: 300px;
   margin-top: 20px;
 }

@@ -13,6 +13,7 @@ const EachRecipe = ({ recipe, userId, token, name, _id }) => {
       state: {
         recipename: recipe.recipename,
         recipedetails: recipe.recipedetails,
+        selectedFile: recipe.selectedFile,
         userId: userId,
         token: token,
         name: name,
@@ -39,7 +40,7 @@ const EachRecipe = ({ recipe, userId, token, name, _id }) => {
     });
   };
 
-  const handleUpdate = (e, recipename, recipedetails) => {
+  const handleUpdate = (e, recipename, recipedetails, selectedFile) => {
     history("/AddRecipes", {
       state: {
         userId: userId,
@@ -47,6 +48,7 @@ const EachRecipe = ({ recipe, userId, token, name, _id }) => {
         name: name,
         recipename: recipename,
         recipedetails: recipedetails,
+        selectedFile: selectedFile,
         flag: 1,
       },
     });
@@ -55,6 +57,9 @@ const EachRecipe = ({ recipe, userId, token, name, _id }) => {
   return (
     <div className="recipeDiv">
       <Grid key={recipe._id} item>
+        <img className="selectedimage"
+          src={recipe.selectedFile}
+        />
         <h2 className="recipename">{recipe.recipename}</h2>
         <p className="recipedetails">
           {recipe.recipedetails.slice(0, 150)}
@@ -76,7 +81,7 @@ const EachRecipe = ({ recipe, userId, token, name, _id }) => {
             variant="contained"
             color="primary"
             onClick={(e) =>
-              handleUpdate(e, recipe.recipename, recipe.recipedetails)
+              handleUpdate(e, recipe.recipename, recipe.recipedetails, recipe.selectedFile)
             }
           >
             Update

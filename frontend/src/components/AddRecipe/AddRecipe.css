@@ -1,12 +1,13 @@
 .buttonsubmit {
-  margin-bottom: 10px !important;
+  margin-bottom: 5px !important;
+  margin-top: 10px !important;
   height: 25px;
 }
 
 .paper {
   padding: 20px;
   width: 500px;
-  height: 260px;
+  height: 300px;
   margin: 50px 380px;
 }
 

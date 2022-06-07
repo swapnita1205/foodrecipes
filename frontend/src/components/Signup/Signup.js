@@ -92,6 +92,7 @@ const Signup = () => {
             name="password"
             value={user.password}
             label="Password"
+            type="password"
             placeholder="Enter your password"
             onChange={handleChange}
           />
@@ -99,6 +100,7 @@ const Signup = () => {
             fullWidth
             name="reEnterPassword"
             value={user.reEnterPassword}
+            type="password"
             label="Confirm Password"
             placeholder="Confirm your password"
             onChange={handleChange}
