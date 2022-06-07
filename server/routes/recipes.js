@@ -61,7 +61,7 @@ recipesrouter.post("/updaterecipes", (req, res) => {
             userId: userId,
             recipename: postData.RecipeName,
           },
-          { $set: { recipedetails: postData.Recipe } }
+          { $set: { recipedetails: postData.Recipe, selectedFile: postData.selectedFile } }
         );
         res.send({ message: "Recipe Updated", recipe: postData });
       } else {
@@ -75,6 +75,7 @@ recipesrouter.post("/addrecipes", (req, res) => {
   const { userId, postData } = req.body;
   const recipename = postData.RecipeName;
   const recipedetails = postData.Recipe;
+  const selectedFile = postData.selectedFile;
   Recipe.findOne(
     { recipename: recipename, userId: userId },
     async (_err, recipe) => {
@@ -85,6 +86,7 @@ recipesrouter.post("/addrecipes", (req, res) => {
           userId,
           recipename,
           recipedetails,
+          selectedFile,
         });
         recipe.save((err) => {
           if (err) {

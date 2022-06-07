@@ -5,6 +5,7 @@ const recipeSchema = new mongoose.Schema(
     userId: String,
     recipename: String,
     recipedetails: String,
+    selectedFile: String,
   },
   {
     timestamps: true,
