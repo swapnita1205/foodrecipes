@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
-import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import "./EachSelectedRecipe.css";
 
 const EachSelectedRecipe = ({ recipe, userId, token, name, _id }) => {
