@@ -2,9 +2,6 @@
 
 A fullstack MERN web app that displays food recipes.
 
-DEMO-
-https://foodrecipepage.netlify.app
-
 Users are able to login and search for food recipes based on name or the ingredients used.
 Additionally a user should be able to sign up, login and add/edit his/her own recipes.
 
@@ -13,7 +10,5 @@ TECHNOLOGY STACK
 Frontend- ReactJS, MaterialUI
 
 Backend- NodeJS, ExpressJS, JWT, MongoDB, Bcryptjs, Mongoose
-
-Deployed on- Heroku and Netlify
 
 
